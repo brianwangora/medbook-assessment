@@ -1,0 +1,1 @@
+This is project folder for a Medbook Practical Assessment Stage for the Software Developer position.
