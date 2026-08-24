@@ -1,0 +1,32 @@
+
+.form-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.form-field label {
+  font-weight: 600;
+  text-align: left;
+}
+
+.form-field input,
+.form-field select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-button{
+    margin-bottom: 80px;
+    width: 150px;
+    height: 40px;
+    border-radius: 25px;
+}

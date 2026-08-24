@@ -24,43 +24,46 @@ function QueueTable({ queue, onStatusChange }) {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Service</th>
-          <th>Original Priority</th>
-          <th>Effective Priority</th>
-          <th>Arrival Time</th>
-          <th>Waiting Time (min)</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {queue.map((customer) => (
-          <tr key={customer.id}>
-            <td>{customer.name}</td>
-            <td>{customer.service}</td>
-            <td>{customer.original_priority}</td>
-            <td>{customer.effective_priority}</td>
-            <td>{formatTime(customer.arrived_at)}</td>
-            <td>{Math.round(customer.waiting_minutes)}</td>
-            <td>{customer.status}</td>
-            <td>
-              {allowedNextStatuses[customer.status].map((action) => (
-                <button
-                  key={action.value}
-                  onClick={() => onStatusChange(customer.id, action.value)}
-                >
-                  {action.label}
-                </button>
-              ))}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+        <h2>Queue Table</h2>
+        <table style={{border: "1px solid", width: "100%", padding: "8px",}}>
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Service</th>
+                <th>Original Priority</th>
+                <th>Effective Priority</th>
+                <th>Arrival Time</th>
+                <th>Waiting Time (min)</th>
+                <th>Status</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {queue.map((customer) => (
+                <tr key={customer.id}>
+                    <td>{customer.name}</td>
+                    <td>{customer.service}</td>
+                    <td>{customer.original_priority}</td>
+                    <td>{customer.effective_priority}</td>
+                    <td>{formatTime(customer.arrived_at)}</td>
+                    <td>{Math.round(customer.waiting_minutes)}</td>
+                    <td>{customer.status}</td>
+                    <td>
+                    {allowedNextStatuses[customer.status].map((action) => (
+                        <button
+                            key={action.value}
+                            onClick={() => onStatusChange(customer.id, action.value)}
+                        >
+                        {action.label}
+                        </button>
+                    ))}
+                    </td>
+                </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
   );
 }
 

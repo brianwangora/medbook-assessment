@@ -3,7 +3,7 @@ import { getQueue, getServing, createCustomer, updateStatus } from './api/client
 import AddCustomerForm from './components/AddCustomerForm';
 import QueueTable from './components/QueueTable';
 import NextUpBanner from './components/NextUpBanner';
-import CurrentlyServing from './components/currentlyServing';
+import CurrentlyServing from './components/CurrentlyServing';
 
 function App() {
   const [queue, setQueue] = useState([]);
@@ -45,7 +45,7 @@ function App() {
 
   return (
     <div>
-      <h1>Medbook Queue</h1>
+      <h1>Medbook Customer Management System</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <NextUpBanner queue={queue} />
       <CurrentlyServing customer={serving} onStatusChange={handleStatusChange} />

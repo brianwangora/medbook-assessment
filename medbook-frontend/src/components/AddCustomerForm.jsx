@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './AddCustomerForm.css';
 
 function AddCustomerForm({ onSubmit }) {
     const [name, setName] = useState('');
@@ -33,49 +34,35 @@ function AddCustomerForm({ onSubmit }) {
         <form onSubmit={handleSubmit}>
             <h2>Add a Customer to the Queue</h2>
 
-            <label>
-                Name
-                <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                />
-            </label>
+            <div className="form-row">
+                <div className="form-field">
+                    <label htmlFor="name">Name</label>
+                    <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                </div>
 
-            <label>
-                Service Required
-                <input
-                type="text"
-                value={service}
-                onChange={(e) => setService(e.target.value)}
-                required
-                />
-            </label>
+                <div className="form-field">
+                    <label htmlFor="service">Service Required</label>
+                    <input id="service" type="text" value={service} onChange={(e) => setService(e.target.value)} required />
+                </div>
+            </div>
 
-            <label>
-                Arrival Time
-                <input
-                type="datetime-local"
-                value={arrivedAt}
-                onChange={(e) => setArrivedAt(e.target.value)}
-                required
-                />
-            </label>
+            <div className="form-row">
+                <div className="form-field">
+                    <label htmlFor="arrivedAt">Arrival Time</label>
+                    <input id="arrivedAt" type="datetime-local" value={arrivedAt} onChange={(e) => setArrivedAt(e.target.value)} required />
+                </div>
 
-            <label>
-                Original Priority
-                <select
-                value={originalPriority}
-                onChange={(e) => setOriginalPriority(e.target.value)}
-                >
-                <option value="Normal">Normal</option>
-                <option value="Priority">Priority</option>
-                <option value="Emergency">Emergency</option>
-                </select>
-            </label>
+                <div className="form-field">
+                    <label htmlFor="priority">Original Priority</label>
+                    <select id="priority" value={originalPriority} onChange={(e) => setOriginalPriority(e.target.value)}>
+                        <option value="Normal">Normal</option>
+                        <option value="Priority">Priority</option>
+                        <option value="Emergency">Emergency</option>
+                    </select>
+                </div>
+            </div>
 
-            <button type="submit" disabled={submitting}>
+            <button className="form-button" type="submit" disabled={submitting}>
                 {submitting ? 'Adding...' : 'Add Customer'}
             </button>
         </form>
