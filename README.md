@@ -17,3 +17,5 @@ Two things worth knowing about this:
 
 type="datetime-local" gives you a native browser date/time picker with no extra library. Its output format is YYYY-MM-DDTHH:mm (e.g. 2026-08-21T10:00) — Laravel's date validation rule and Carbon both parse this fine, so no conversion needed before sending it to the API.
 The form doesn't call the API directly — it just calls onSubmit(formData), which App.jsx owns. That keeps this component "dumb" (just UI + local input state), while all the actual API/error-handling logic stays centralized in one place — useful to point out in the live session as a deliberate separation of concerns.
+
+initially the UI had no way to view or act on a customer once served, since the queue only lists Waiting customers by design; added a dedicated endpoint and section for the currently-served customer

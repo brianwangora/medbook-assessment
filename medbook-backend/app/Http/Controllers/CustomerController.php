@@ -85,4 +85,11 @@ class CustomerController extends Controller
 
         return response()->json($customer);
     }
+
+    public function serving()
+    {
+        $customer = Customer::where('status', 'Being Served')->first();
+
+        return response()->json($customer);
+    }
 }

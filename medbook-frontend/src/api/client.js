@@ -11,3 +11,4 @@ export const getQueue = (asOf) => client.get('/customers/queue', { params: asOf 
 export const getNext = (asOf) => client.get('/customers/next', { params: asOf ? { as_of: asOf } : {} });
 export const createCustomer = (data) => client.post('/customers', data);
 export const updateStatus = (id, status) => client.patch(`/customers/${id}/status`, { status });
+export const getServing = () => client.get('/customers/serving');

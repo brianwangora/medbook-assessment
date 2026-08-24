@@ -1,17 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getQueue, createCustomer, updateStatus } from './api/client';
+import { getQueue, getServing, createCustomer, updateStatus } from './api/client';
 import AddCustomerForm from './components/AddCustomerForm';
 import QueueTable from './components/QueueTable';
 import NextUpBanner from './components/NextUpBanner';
+import CurrentlyServing from './components/currentlyServing';
 
 function App() {
   const [queue, setQueue] = useState([]);
   const [error, setError] = useState(null);
+  const [serving, setServing] = useState(null);
 
   const refreshQueue = useCallback(async () => {
     try {
-      const res = await getQueue();
-      setQueue(res.data);
+      const [queueRes, servingRes] = await Promise.all([getQueue(), getServing()]);
+      setQueue(queueRes.data);
+      setServing(servingRes.data);
       setError(null);
     } catch (err) {
       setError('Could not load queue.');
@@ -45,6 +48,7 @@ function App() {
       <h1>Medbook Queue</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <NextUpBanner queue={queue} />
+      <CurrentlyServing customer={serving} onStatusChange={handleStatusChange} />
       <AddCustomerForm onSubmit={handleAddCustomer} />
       <QueueTable queue={queue} onStatusChange={handleStatusChange} />
     </div>
