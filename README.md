@@ -9,3 +9,11 @@ lockForUpdate() takes a row-level lock, but it only actually prevents a race if 
 I used a plain if/422/409 split rather than exceptions — either is fine; explain whichever you keep.
 
 Customer Seeder seeds sample data into db
+seed command; php artisan migrate:fresh --seed
+
+A design point worth noting for your README: refreshQueue() is called after every mutation rather than trying to update local state optimistically. Since effective_priority and waiting_minutes are always server-calculated (never trusted client-side), re-fetching is the only correct way to keep the displayed queue accurate — an optimistic update would have to reimplement the escalation logic in JavaScript, which risks drifting out of sync with the backend.
+
+Two things worth knowing about this:
+
+type="datetime-local" gives you a native browser date/time picker with no extra library. Its output format is YYYY-MM-DDTHH:mm (e.g. 2026-08-21T10:00) — Laravel's date validation rule and Carbon both parse this fine, so no conversion needed before sending it to the API.
+The form doesn't call the API directly — it just calls onSubmit(formData), which App.jsx owns. That keeps this component "dumb" (just UI + local input state), while all the actual API/error-handling logic stays centralized in one place — useful to point out in the live session as a deliberate separation of concerns.

@@ -14,7 +14,7 @@ class QueueService
      */
     public function effectivePriority(Customer $customer, Carbon $asOf): string
     {
-        $waitedMinutes = $customer->arrived_at->diffInMinutes($asOf);
+        $waitedMinutes = $customer->arrived_at->diffInMinutes($asOf, absolute: true);
 
         return match ($customer->original_priority) {
             'Emergency' => 'Emergency',
@@ -37,7 +37,7 @@ class QueueService
             ->get()
             ->map(function (Customer $customer) use ($asOf) {
                 $customer->effective_priority = $this->effectivePriority($customer, $asOf);
-                $customer->waiting_minutes = $customer->arrived_at->diffInMinutes($asOf);
+                $customer->waiting_minutes = $customer->arrived_at->diffInMinutes($asOf, absolute: true);
                 return $customer;
             })
             ->sortBy([
