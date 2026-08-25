@@ -25,7 +25,7 @@ class StoreCustomerRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'service' => 'required|string|max:255',
-            'arrived_at' => 'required|date',
+            'arrived_at' => 'required|date|before_or_equal:now',
             'original_priority' => 'required|in:Normal,Priority,Emergency',
         ];
     }
