@@ -26,14 +26,23 @@ To setup the application;
 #### Backend Setup
  - From your terminal run 'cd medbook-backend'
  - Run 'composer install'
+ - Ensure MySQL is running, then create the database:
+
+        mysql -u root -p
+        CREATE DATABASE medbook;
+        CREATE USER 'medbook_user'@'localhost' IDENTIFIED BY 'choose_a_password';
+        GRANT ALL PRIVILEGES ON medbook.* TO 'medbook_user'@'localhost';
+        FLUSH PRIVILEGES;
+        EXIT;
+
  - Run 'cp .env.example .env'
  - Run 'php artisan key:generate'
- - Edit .env with your MySQL credentials:
+ - Edit .env with the MySQL credentials you just created:
     
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
-    DB_DATABASE=medbook1
+    DB_DATABASE=medbook
     DB_USERNAME=your_username
     DB_PASSWORD=your_password
     APP_TIMEZONE=Africa/Nairobi
